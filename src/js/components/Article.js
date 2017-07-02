@@ -3,6 +3,17 @@ import React from "react";
 export default class Article extends React.Component {
 
   render() {
+     const { complete, edit, text } = this.props;
+
+    const icon = complete ? "\u2714" : "\u2716"
+
+    if (edit) {
+      return (
+        <li>
+          <input value={text} focus="focused"/>
+        </li>
+      );
+    }
     const { title } = this.props;
     const colStyle={
       marginTop:"5px",
@@ -1127,6 +1138,10 @@ Others<input type="text"/>
       <div class="col-md-4" style={colStyle}>
         <h2>{title}</h2>
         <h6>{userMessage}</h6>
+         <li>
+        <span>{text}</span>
+        <span>{icon}</span>
+      </li>
   <form>
 </form>
   { /*<a class="btn btn-default" href="#">Save</a> */}

@@ -8,13 +8,6 @@ export default class Layout extends React.Component {
   navigate (){
     this.props.history.pushState(null,"/");
   }
-   handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.value);
-    event.preventDefault();
-          this.setState({
-  [submit]: value
-});
-  }
   render() {
     const { location } = this.props;
     const containerStyle = {
@@ -31,14 +24,12 @@ export default class Layout extends React.Component {
     return (
       <div>
       {this.props.children}
+
 <Link to="settings"><button class="btn btn-success" style={buttonSaveStyle}>Save</button></Link>
-<Link to="archives" class="btn btn-danger" style={buttonCancelStyle}>Cancel</Link>
+<Link to="featured" class="btn btn-danger" style={buttonCancelStyle}>Cancel</Link>
         <Nav location={location} />
         <div class="container" style={containerStyle}>
           <div class="row">
-          <form onSubmit={this.handleSubmit}>
-  <input type="submit" value="Submit" />
-  </form>
           </div>
           <Footer/>
         </div>

@@ -1,8 +1,36 @@
 import React from "react";
 
 import Article from "../components/Article";
-
+import TodoStore from "../stores/TodoStore";
+import * as TodoActions from "../actions/TodoActions";
 export default class Featured extends React.Component {
+constructor(){
+ super();
+    this.getTodos = this.getTodos.bind(this);
+    this.state = {
+      todos: TodoStore.getAll(),
+    };
+  }
+
+  componentWillMount() {
+    TodoStore.on("change", this.getTodos);
+  }
+
+  componentWillUnmount() {
+    TodoStore.removeListener("change", this.getTodos);
+  }
+
+  getTodos() {
+    this.setState({
+      todos: TodoStore.getAll(),
+    });
+  }
+
+  reloadTodos() {
+    TodoActions.reloadTodos();
+  }
+
+
   render() {
      const mainStyle = {
       marginLeft:"25px",
@@ -44,6 +72,13 @@ export default class Featured extends React.Component {
 
     const randomAd = adText[Math.round( Math.random() * (adText.length-1) )];
     console.log("featured");
+
+    const { todos } = this.state;
+
+    const TodoComponents = todos.map((todo) => {
+        return <Article key={todo.id} {...todo}/>;
+    });
+
     return (
       <div class="main" style={mainStyle}>
         <div class="row">
@@ -52,9 +87,14 @@ export default class Featured extends React.Component {
               {randomAd}
             </div>
           </div>
-        </div>
+    </div>
 
         <div class="row">{Articles}</div>
+         <div>
+        <button onClick={this.reloadTodos.bind(this)}>Reload!</button>
+        <h1>Todos</h1>
+        <ul>{TodoComponents}</ul>
+      </div>
       </div>
     );
   }
