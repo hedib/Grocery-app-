@@ -73,11 +73,7 @@ constructor(){
     const randomAd = adText[Math.round( Math.random() * (adText.length-1) )];
     console.log("featured");
 
-    const { todos } = this.state;
-
-    const TodoComponents = todos.map((todo) => {
-        return <Article key={todo.id} {...todo}/>;
-    });
+    
 
     return (
       <div class="main" style={mainStyle}>
@@ -93,7 +89,7 @@ constructor(){
          <div>
         <button onClick={this.reloadTodos.bind(this)}>Reload!</button>
         <h1>Todos</h1>
-        <ul>{TodoComponents}</ul>
+        <ul>{Articles}</ul>
       </div>
       </div>
     );

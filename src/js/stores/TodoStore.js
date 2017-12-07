@@ -3,21 +3,7 @@ import { EventEmitter } from "events";
 import dispatcher from "../dispatcher";
 
 class TodoStore extends EventEmitter {
-  constructor() {
-    super()
-    this.todos = [
-      {
-        id: 113464613,
-        text: "Go Shopping",
-        complete: false
-      },
-      {
-        id: 235684679,
-        text: "Pay Water Bill",
-        complete: false
-      },
-    ];
-  }
+  
 
   createTodo(text) {
     const id = Date.now();
